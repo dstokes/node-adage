@@ -21,7 +21,7 @@ function scan(type, done) {
 
   // read the entire file
   // make note of the fortune offsets
-  fs.createReadStream('./fortunes/'+ type)
+  fs.createReadStream(__dirname +'/fortunes/'+ type)
     .pipe(split())
     .pipe(through(write))
     .on('end', function() { done(null, offsets); });
@@ -34,7 +34,8 @@ function read(type, done) {
   var len = (offsets[index + 1] - 3) - offsets[index];
   var buf = new Buffer(len);
 
-  fs.open('./fortunes/'+ type, 'r', function(err, fd) {
+  fs.open(__dirname +'/fortunes/'+ type, 'r', function(err, fd) {
+    if (err) return done(err);
     fs.read(fd, buf, 0, len, offsets[index], function (err, bytes, buf) {
       done(err, buf.toString());
     });
