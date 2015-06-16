@@ -1,6 +1,6 @@
 {
   "name": "adage",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Unix fortune for Node",
   "main": "index.js",
   "scripts": {
